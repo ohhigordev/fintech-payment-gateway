@@ -4,6 +4,7 @@ import com.ohhigordev.io.payment_gateway.domain.User;
 import com.ohhigordev.io.payment_gateway.domain.UserType;
 import com.ohhigordev.io.payment_gateway.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -13,6 +14,8 @@ import java.math.BigDecimal;
 public class UserService {
 
     private final UserRepository repository;
+    private final PasswordEncoder passwordEncoder;
+
 
     public void validateTransaction(User sender, BigDecimal amount) throws Exception{
         if(sender.getUserType() == UserType.MERCHANT){
@@ -29,6 +32,8 @@ public class UserService {
     }
 
     public void saveUser(User user){
+        String encryptedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encryptedPassword);
         repository.save(user);
     }
 
