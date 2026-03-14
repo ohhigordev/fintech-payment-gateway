@@ -1,7 +1,6 @@
 package com.ohhigordev.io.payment_gateway.infra;
 
 import com.ohhigordev.io.payment_gateway.dto.ExceptionDTO;
-import org.apache.catalina.connector.Response;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
